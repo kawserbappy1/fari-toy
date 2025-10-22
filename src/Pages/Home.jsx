@@ -1,25 +1,36 @@
-import React, { Suspense, use } from "react";
+import React, { Suspense, lazy, use } from "react";
 import HomeSlider from "../Components/HomeSlider";
 import DiscountToys from "../Components/DiscountToys";
 import ChildEducation from "../Components/ChildEducation";
-import HomeToys from "../Components/HomeToys";
-const toysResponse = fetch("/toy.json").then((res) => res.json());
-const Home = () => {
-  const allToys = use(toysResponse);
 
+const HomeToys = lazy(() => import("../Components/HomeToys"));
+const toysResponse = fetch("/toy.json").then((res) => res.json());
+
+function HomeToysWrapper() {
+  const allToys = use(toysResponse);
+  return <HomeToys allToys={allToys} />;
+}
+
+const Home = () => {
   return (
     <div>
-      <HomeSlider></HomeSlider>
+      <HomeSlider />
       <section className="container mx-auto mt-20 mb-10">
-        <Suspense fallback={<span className="loading loading-spinner loading-xl"></span>}>
-          <HomeToys allToys={allToys}></HomeToys>
+        <Suspense
+          fallback={
+            <div className="flex justify-center items-center py-20">
+              <span className="loading loading-spinner loading-xl text-orangeColor"></span>
+            </div>
+          }
+        >
+          <HomeToysWrapper />
         </Suspense>
       </section>
       <section className="container mx-auto mt-20 mb-10">
-        <DiscountToys></DiscountToys>
+        <DiscountToys />
       </section>
       <section className="container mx-auto mt-20 mb-10">
-        <ChildEducation></ChildEducation>
+        <ChildEducation />
       </section>
     </div>
   );
