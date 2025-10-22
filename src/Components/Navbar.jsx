@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CgMenuGridO, CgShoppingCart } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import { IoClose } from "react-icons/io5";
@@ -9,11 +9,23 @@ import { Link } from "react-router";
 const Navbar = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="shadow fixed left-0 right-0 z-50">
+    <div
+      className={`sticky top-0 z-50 transition-all duration-300 ${isSticky ? "shadow-md" : ""}`}
+      style={{ position: "sticky" }}
+    >
       {/* Navbar */}
-      <nav className="container mx-auto flex justify-between items-center h-16 px-2 md:px-4 ">
+      <nav className="container mx-auto flex justify-between items-center h-16 px-2 md:px-4">
         {/* Logo */}
         <div>
           <Link to="/">
@@ -44,7 +56,7 @@ const Navbar = () => {
 
         {/* Menu Buttons */}
         <div className="flex items-center gap-2 md:gap-5">
-          <button className="cursor-pointer" onClick={() => setShowSearch(true)}>
+          <button onClick={() => setShowSearch(true)}>
             <CiSearch size={22} />
           </button>
 
@@ -55,24 +67,24 @@ const Navbar = () => {
             </span>
           </button>
 
-          <Link to={"/login"} className="btn bg-orangeColor text-white font-bold rounded-md">
+          <Link to="/login" className="btn bg-orangeColor text-white font-bold rounded-md">
             Login
           </Link>
         </div>
 
-        {/* Mobile Menu Button  */}
+        {/* Mobile Menu Button */}
         <button onClick={() => setShowMenu(!showMenu)} className="md:hidden z-50">
           {showMenu ? (
-            <IoClose size={22} className=" cursor-pointer  text-white" />
+            <IoClose size={22} className="cursor-pointer text-white" />
           ) : (
-            <CgMenuGridO size={22} className=" cursor-pointer " />
+            <CgMenuGridO size={22} className="cursor-pointer" />
           )}
         </button>
       </nav>
 
-      {/* Full search box  */}
+      {/* Full Search Box */}
       {showSearch && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex flex-col items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex flex-col items-center justify-center z-[999]">
           <button
             onClick={() => setShowSearch(false)}
             className="absolute top-6 right-8 text-white text-3xl cursor-pointer"
@@ -85,17 +97,17 @@ const Navbar = () => {
             <input
               type="text"
               placeholder="Search here..."
-              className="w-full py-3 pl-12 pr-4 rounded-lg outline-none text-white"
+              className="w-full py-3 pl-12 pr-4 rounded-lg outline-none text-white bg-transparent border border-white/40 placeholder-white/80"
               autoFocus
             />
           </div>
         </div>
       )}
 
-      {/* Mobile Menu  */}
+      {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute bg-purpleColor top-0 w-full min-h-screen py-20  transition-all duration-500" ${
-          showMenu ? "left-[0]" : "-left-[100%]"
+        className={`md:hidden absolute bg-purpleColor top-0 w-full min-h-screen py-20 transition-all duration-500 ${
+          showMenu ? "left-0" : "-left-full"
         }`}
       >
         <ul className="flex flex-col items-center gap-8 text-white">
@@ -105,7 +117,7 @@ const Navbar = () => {
             </MyLinks>
           </li>
           <li>
-            <MyLinks onClick={() => setShowMenu(!showMenu)} to="/shop">
+            <MyLinks onClick={() => setShowMenu(false)} to="/shop">
               Shop
             </MyLinks>
           </li>

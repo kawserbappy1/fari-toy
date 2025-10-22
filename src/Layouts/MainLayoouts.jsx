@@ -6,12 +6,12 @@ import Footer from "../Components/Footer";
 
 const MainLayoouts = () => {
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <header>
         <TopNavbar></TopNavbar>
         <Navbar></Navbar>
       </header>
-      <main>
+      <main className="flex-1">
         <Outlet></Outlet>
       </main>
       <footer>
