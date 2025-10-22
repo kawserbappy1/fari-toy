@@ -2,9 +2,10 @@ import React from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { IoHeartSharp } from "react-icons/io5";
 import { RiShoppingBag3Line } from "react-icons/ri";
+import { Link } from "react-router";
 
 const ToyCard = ({ toys }) => {
-  const { pictureURL, toyName, rating, availableQuantity, price } = toys;
+  const { pictureURL, toyName, rating, availableQuantity, price, toyId } = toys;
   const fullStars = Math.floor(rating);
   const hasHalfStar = rating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -39,7 +40,9 @@ const ToyCard = ({ toys }) => {
             <span className="ml-2 text-gray-600">{rating.toFixed(1)}</span>
           </div>
 
-          <button className="btn bg-orangeColor text-white">See Details</button>
+          <Link to={`/details/${toyId}`} className="btn bg-orangeColor text-white">
+            See Details
+          </Link>
         </div>
       </div>
 

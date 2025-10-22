@@ -8,6 +8,7 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import Shop from "../Pages/Shop";
 import SignUp from "../Pages/SignUp";
+import ShowToyDetails from "../Components/ShowToyDetails";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop></Shop>,
+        loader: () => fetch("/toy.json"),
+      },
+      {
+        path: "/details/:id",
+        element: <ShowToyDetails></ShowToyDetails>,
         loader: () => fetch("/toy.json"),
       },
       {

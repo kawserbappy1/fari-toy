@@ -6,7 +6,7 @@ import logo from "../assets/logo.png";
 import MyLinks from "./MyLinks";
 import { Link } from "react-router";
 
-const Navbar = () => {
+const Navbar = ({ cartCount }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -63,7 +63,7 @@ const Navbar = () => {
           <button className="relative">
             <CgShoppingCart size={22} />
             <span className="absolute -top-3 -right-1 bg-greenColor w-4 h-4 text-white rounded-full text-xs text-center">
-              0
+              {cartCount}
             </span>
           </button>
 

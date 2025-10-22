@@ -1,12 +1,15 @@
 import React from "react";
 import { useLoaderData } from "react-router";
+import ShopBanner from "../Components/ShopBanner";
+import AllToys from "../Components/AllToys";
 
 const Shop = () => {
   const allToys = useLoaderData();
-  console.log(allToys);
+
   return (
     <div>
-      <h1>Shop</h1>
+      <ShopBanner></ShopBanner>
+      <AllToys allToys={allToys}></AllToys>
     </div>
   );
 };
