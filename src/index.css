@@ -12,8 +12,8 @@
 
   --color-purpleColor: #7754f6;
   --color-blueColor: #0574f9;
-  --color-GreenColor: #17be7d;
-  --color-yellowColor: #fda745;
+  --color-greenColor: #17be7d;
+  --color-orangeColor: #ff4136;
   --color-pinkColor: #f676b1;
   --color-bg1: #f8f7fe;
   --color-bg2: #e3f7ee;
@@ -24,4 +24,8 @@
   --breakpoint-lg: 64rem;
   --breakpoint-xl: 80rem;
   --breakpoint-2xl: 96rem;
+}
+
+html {
+  @apply font-poppins;
 }
