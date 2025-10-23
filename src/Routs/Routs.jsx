@@ -9,6 +9,7 @@ import Login from "../Pages/Login";
 import Shop from "../Pages/Shop";
 import SignUp from "../Pages/SignUp";
 import ShowToyDetails from "../Components/ShowToyDetails";
+import Profile from "../Components/Profile";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/profile",
+        element: <Profile></Profile>,
       },
     ],
   },

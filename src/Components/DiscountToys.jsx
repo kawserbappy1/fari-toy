@@ -25,7 +25,7 @@ const DiscountToys = () => {
         </div>
       </div>
       <div className="flex flex-col md:flex-row items-center gap-5 ">
-        <div className="flex items-center gap-5 bg-bg1 p-4 rounded-xl">
+        <div className="flex items-center gap-5 bg-bg1 p-10 rounded-xl">
           <div className="flex-1">
             <h2 className="font-knewave capitalize text-2xl lg:text-4xl mb-5">toy for boys</h2>
             <p>the perfect toys for boys combine curisity and activity</p>
@@ -37,7 +37,7 @@ const DiscountToys = () => {
             <img src={boystoy} alt="" />
           </div>
         </div>
-        <div className="flex items-center gap-10 bg-bg2 p-4 rounded-xl">
+        <div className="flex items-center gap-10 bg-bg2 p-10 rounded-xl">
           <div className="">
             <h2 className="font-knewave capitalize text-2xl lg:text-4xl mb-5">toy for girls</h2>
             <p>the perfect toys for boys combine curisity and activity</p>
