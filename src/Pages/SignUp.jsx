@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const SignUp = () => {
-  const { createUser, updateUser, googleLogin } = useContext(AuthContext);
+  const { createUser, updateUser, googleLogin, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -42,23 +42,38 @@ const SignUp = () => {
   };
 
   const handleGoogleLogin = () => {
+    setLoading(true);
     googleLogin()
-      .then(() =>
+      .then((result) => {
+        const loggedUser = result.user;
+
+        // ✅ Update user context manually to ensure photoURL is present
+        setUser({
+          displayName: loggedUser.displayName,
+          email: loggedUser.email,
+          photoURL: loggedUser.photoURL, // this fixes navbar image
+          uid: loggedUser.uid,
+        });
+
         Swal.fire({
           title: "Welcome!",
-          text: "Google login successful 🚀",
+          text: `Logged in as ${loggedUser.displayName}`,
           icon: "success",
           confirmButtonColor: "#f97316",
-        })
-      )
-      .then(() => navigate("/"))
+          timer: 1500,
+          showConfirmButton: false,
+        });
+
+        navigate("/"); // Navigate after login
+      })
       .catch((err) =>
         Swal.fire({
           title: "Login failed",
           text: err.message,
           icon: "error",
         })
-      );
+      )
+      .finally(() => setLoading(false));
   };
 
   return (

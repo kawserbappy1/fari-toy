@@ -10,6 +10,7 @@ import Shop from "../Pages/Shop";
 import SignUp from "../Pages/SignUp";
 import ShowToyDetails from "../Components/ShowToyDetails";
 import Profile from "../Components/Profile";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <ShowToyDetails></ShowToyDetails>,
+        element: (
+          <PrivateRoute>
+            <ShowToyDetails></ShowToyDetails>
+          </PrivateRoute>
+        ),
         loader: () => fetch("/toy.json"),
       },
       {

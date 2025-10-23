@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useLocation } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 
@@ -10,9 +10,14 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
-  // 🟢 Handle email/password login
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // 🔹 Get the page user tried to access, default to home
+  const from = location.state?.from?.pathname || "/";
+
+  // Handle email/password login
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -24,8 +29,10 @@ const Login = () => {
           text: "Logged in successfully!",
           icon: "success",
           confirmButtonColor: "#f97316",
+          timer: 1500,
+          showConfirmButton: false,
         });
-        navigate("/");
+        navigate(from, { replace: true }); // Redirect to original page
       })
       .catch((err) =>
         Swal.fire({
@@ -38,8 +45,9 @@ const Login = () => {
       .finally(() => setLoading(false));
   };
 
-  // 🟢 Handle Google login
+  // Handle Google login
   const handleGoogleLogin = () => {
+    setLoading(true);
     googleLogin()
       .then(() => {
         Swal.fire({
@@ -47,8 +55,10 @@ const Login = () => {
           text: "Welcome back!",
           icon: "success",
           confirmButtonColor: "#f97316",
+          timer: 1500,
+          showConfirmButton: false,
         });
-        navigate("/");
+        navigate(from, { replace: true }); // Redirect to original page
       })
       .catch((err) =>
         Swal.fire({
@@ -57,24 +67,25 @@ const Login = () => {
           icon: "error",
           confirmButtonColor: "#f97316",
         })
-      );
+      )
+      .finally(() => setLoading(false));
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100 px-4 relative overflow-hidden">
-      {/* Floating Background Decorations */}
+      {/* Floating Background */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 0.1, y: 0 }}
         transition={{ duration: 2, repeat: Infinity, repeatType: "mirror" }}
         className="absolute w-96 h-96 bg-orange-300 rounded-full blur-3xl top-20 left-10"
-      ></motion.div>
+      />
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 0.1, y: 0 }}
         transition={{ duration: 2, repeat: Infinity, repeatType: "mirror" }}
         className="absolute w-96 h-96 bg-purple-400 rounded-full blur-3xl bottom-20 right-10"
-      ></motion.div>
+      />
 
       {/* Login Card */}
       <motion.div
@@ -86,7 +97,6 @@ const Login = () => {
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Welcome Back 👋</h2>
         <p className="text-center text-gray-500 mb-8">Please log in to your account</p>
 
-        {/* 🔶 Login Form */}
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
             <label className="block text-gray-700 font-semibold mb-2">Email</label>
@@ -128,7 +138,7 @@ const Login = () => {
           <div className="flex-grow h-px bg-gray-300"></div>
         </div>
 
-        {/* 🟢 Google Login */}
+        {/* Google Login */}
         <button
           onClick={handleGoogleLogin}
           className="flex items-center justify-center w-full border border-gray-300 py-3 rounded-lg bg-white hover:bg-gray-100 transition duration-300 shadow-sm"

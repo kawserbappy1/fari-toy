@@ -1,9 +1,8 @@
-// Import the functions you need from the SDKs you need
+// src/firebase/firebase.config.js
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getAuth } from "firebase/auth";
 
-// Your web app's Firebase configuration
+// Your Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBmUEfhg0vzG-0IygMhtTSsrrx0vy06vLU",
   authDomain: "fari-toy.firebaseapp.com",
@@ -15,4 +14,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+// ✅ Export app and auth (only once)
+export const auth = getAuth(app);
 export default app;

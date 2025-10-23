@@ -95,7 +95,7 @@ const Navbar = ({ cartCount }) => {
           {user ? (
             <div className="relative group">
               <img
-                src={user.photoURL}
+                src={user?.photoURL || "https://i.ibb.co/2kRzVQ9/default-avatar.png"}
                 alt="avatar"
                 className="w-10 h-10 rounded-full border-2 border-orangeColor cursor-pointer"
               />
