@@ -11,11 +11,13 @@ import SignUp from "../Pages/SignUp";
 import ShowToyDetails from "../Components/ShowToyDetails";
 import Profile from "../Components/Profile";
 import PrivateRoute from "./PrivateRoute";
+import ErrorPage from "../Components/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayoouts></MainLayoouts>,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -60,7 +62,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile></Profile>,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
     ],
   },

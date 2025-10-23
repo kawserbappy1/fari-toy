@@ -4,17 +4,19 @@ import { motion } from "framer-motion";
 import { Link, useNavigate, useLocation } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
 
 const Login = () => {
-  const { logInFunction, googleLogin } = useContext(AuthContext);
+  const { logInFunction, googleLogin, sendPassResetEmailFunc } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  // 🔹 Get the page user tried to access, default to home
   const from = location.state?.from?.pathname || "/";
 
   // Handle email/password login
@@ -32,7 +34,7 @@ const Login = () => {
           timer: 1500,
           showConfirmButton: false,
         });
-        navigate(from, { replace: true }); // Redirect to original page
+        navigate(from, { replace: true });
       })
       .catch((err) =>
         Swal.fire({
@@ -58,7 +60,7 @@ const Login = () => {
           timer: 1500,
           showConfirmButton: false,
         });
-        navigate(from, { replace: true }); // Redirect to original page
+        navigate(from, { replace: true });
       })
       .catch((err) =>
         Swal.fire({
@@ -69,6 +71,37 @@ const Login = () => {
         })
       )
       .finally(() => setLoading(false));
+  };
+
+  // ✅ Handle forgot password
+  const handleForgotPassword = () => {
+    if (!email) {
+      Swal.fire({
+        title: "Oops!",
+        text: "Please enter your email first",
+        icon: "warning",
+        confirmButtonColor: "#f97316",
+      });
+      return;
+    }
+
+    sendPassResetEmailFunc(email)
+      .then(() => {
+        Swal.fire({
+          title: "Email Sent!",
+          text: "Check your inbox to reset your password",
+          icon: "success",
+          confirmButtonColor: "#f97316",
+        });
+      })
+      .catch((err) =>
+        Swal.fire({
+          title: "Failed",
+          text: err.message,
+          icon: "error",
+          confirmButtonColor: "#f97316",
+        })
+      );
   };
 
   return (
@@ -110,16 +143,29 @@ const Login = () => {
             />
           </div>
 
-          <div>
+          <div className="relative">
             <label className="block text-gray-700 font-semibold mb-2">Password</label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orangeColor focus:outline-none"
             />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-[10px] top-[50px] cursor-pointer z-50"
+            >
+              {showPassword ? <FaEye /> : <IoEyeOff />}
+            </span>
+            <button
+              type="button"
+              onClick={handleForgotPassword}
+              className="hover:underline cursor-pointer mt-2 text-sm text-orangeColor"
+            >
+              Forgot password?
+            </button>
           </div>
 
           <button

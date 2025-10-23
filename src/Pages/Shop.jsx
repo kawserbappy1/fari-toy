@@ -2,6 +2,7 @@
 import ShopBanner from "../Components/ShopBanner";
 import AllToys from "../Components/AllToys";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 const Shop = () => {
   const [allToys, setAllToys] = useState([]);
@@ -31,6 +32,9 @@ const Shop = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>SHOP || FARI TOY</title>
+      </Helmet>
       <ShopBanner />
       <AllToys allToys={allToys} />
     </div>

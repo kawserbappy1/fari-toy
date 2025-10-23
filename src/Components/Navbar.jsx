@@ -8,8 +8,7 @@ import { Link, useNavigate } from "react-router"; // ✅ updated import
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 
-const Navbar = ({ cartCount }) => {
-  const [showSearch, setShowSearch] = useState(false);
+const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const navigate = useNavigate(); // ✅ navigation hook
@@ -75,41 +74,34 @@ const Navbar = ({ cartCount }) => {
             <li>
               <MyLinks to="/blog">Blog</MyLinks>
             </li>
+            <li>
+              <MyLinks to="/profile">My Profile</MyLinks>
+            </li>
           </ul>
         </div>
 
         {/* Menu Buttons */}
         <div className="flex items-center gap-2 md:gap-5 relative">
-          <button onClick={() => setShowSearch(true)}>
-            <CiSearch size={22} />
-          </button>
-
-          <button className="relative">
-            <CgShoppingCart size={22} />
-            <span className="absolute -top-3 -right-1 bg-greenColor w-4 h-4 text-white rounded-full text-xs text-center">
-              {cartCount}
-            </span>
-          </button>
-
           {/* Conditional Login / User */}
           {user ? (
-            <div className="relative group">
-              <img
-                src={user?.photoURL || "https://i.ibb.co/2kRzVQ9/default-avatar.png"}
-                alt="avatar"
-                className="w-10 h-10 rounded-full border-2 border-orangeColor cursor-pointer"
-              />
-              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-orange-100">
-                  Profile
-                </Link>
-                <button
-                  onClick={handleLogout} // ✅ use updated logout handler
-                  className="w-full text-left px-4 py-2 text-gray-700 hover:bg-orange-100"
-                >
-                  Logout
-                </button>
+            <div className="flex  gap-2">
+              <div className="relative group">
+                <img
+                  src={user?.photoURL}
+                  alt="avatar"
+                  className="w-10 h-10 rounded-full border-2 border-orangeColor cursor-pointer"
+                />
+                <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 bg-gray-800 text-white text-xs px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-all whitespace-nowrap top-full">
+                  {user.displayName}
+                </div>
               </div>
+              <button
+                onClick={handleLogout} // ✅ use updated logout handler
+                className="px-4 py-2 text-white bg-orangeColor hover:bg-orange-500 rounded-md"
+              >
+                Logout
+              </button>
+              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300"></div>
             </div>
           ) : (
             <Link to="/login" className="btn bg-orangeColor text-white font-bold rounded-md">
@@ -125,26 +117,6 @@ const Navbar = ({ cartCount }) => {
       </nav>
 
       {/* Search Box */}
-      {showSearch && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex flex-col items-center justify-center z-[999]">
-          <button
-            onClick={() => setShowSearch(false)}
-            className="absolute top-6 right-8 text-white text-3xl cursor-pointer"
-          >
-            <IoClose />
-          </button>
-
-          <div className="relative w-full max-w-md px-6">
-            <CiSearch size={22} className="absolute text-white left-8 top-1/2 -translate-y-1/2" />
-            <input
-              type="text"
-              placeholder="Search here..."
-              className="w-full py-3 pl-12 pr-4 rounded-lg outline-none text-white bg-transparent border border-white/40 placeholder-white/80"
-              autoFocus
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 };

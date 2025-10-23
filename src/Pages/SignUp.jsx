@@ -4,10 +4,14 @@ import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import { FaEye } from "react-icons/fa";
+import { IoEyeOff } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const { createUser, updateUser, googleLogin, setUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleSignUp = (e) => {
@@ -19,6 +23,14 @@ const SignUp = () => {
     const password = form.password.value;
     setLoading(true);
 
+    const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{8,}$/;
+
+    if (!regExp.test(password)) {
+      toast.error(
+        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character"
+      );
+      return;
+    }
     createUser(email, password)
       .then(() => updateUser({ displayName: name, photoURL }))
       .then(() => {
@@ -107,8 +119,22 @@ const SignUp = () => {
           <input type="text" name="photoURL" placeholder="Photo URL" required className="input w-full" />
           <label className="block text-gray-700 font-semibold mb-2">Email</label>
           <input type="email" name="email" placeholder="you@example.com" required className="input w-full" />
-          <label className="block text-gray-700 font-semibold mb-2">Password</label>
-          <input type="password" name="password" placeholder="••••••••" required className="input w-full" />
+          <div className="relative">
+            <label className="block text-gray-700 font-semibold mb-2">Password</label>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="••••••••"
+              required
+              className="input w-full"
+            />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-[10px] top-[45px] cursor-pointer z-50"
+            >
+              {showPassword ? <FaEye /> : <IoEyeOff />}
+            </span>
+          </div>
           <button
             type="submit"
             disabled={loading}

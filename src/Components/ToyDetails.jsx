@@ -1,17 +1,10 @@
 import React from "react";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { useNavigate, useOutletContext } from "react-router";
-import { toast } from "react-toastify";
-
+import { useNavigate } from "react-router";
+import BuyLater from "./BuyLater";
 const ToyDetails = ({ toy }) => {
   const navigate = useNavigate();
-  const { setCartCount } = useOutletContext();
-
-  const handleAddToCart = () => {
-    setCartCount((prev) => prev + 1);
-    toast.success("This item Add to cart Successfully");
-  };
 
   const fullStars = Math.floor(toy.rating);
   const hasHalfStar = toy.rating % 1 >= 0.5;
@@ -61,14 +54,13 @@ const ToyDetails = ({ toy }) => {
               </div>
               <p className="text-gray-700 leading-relaxed text-justify">{toy.description}</p>
             </div>
-            <button
-              onClick={handleAddToCart}
-              className="mt-6  bg-orangeColor hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all cursor-pointer"
-            >
+            <button className="mt-6  bg-orangeColor hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition-all cursor-pointer">
               Add to Cart
             </button>
           </div>
         </div>
+
+        <BuyLater></BuyLater>
       </div>
     </div>
   );
