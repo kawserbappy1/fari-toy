@@ -8,7 +8,7 @@ The project integrates modern technologies like React and Firebase, enabling smo
 ---
 
 ## 🌟 live links
-- **User Authentication**: Secure sign-up and login with Firebase.   
+https://faritoystore.netlify.app 
 
 ---
 
