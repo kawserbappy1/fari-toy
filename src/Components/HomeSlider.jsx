@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import { Link } from "react-router";
 const HomeSlider = () => {
   return (
     <Swiper
@@ -30,9 +31,12 @@ const HomeSlider = () => {
                 Looking for toys that bring kids joy? We have a huge selection of fun and educational toys to delight
                 children of all ages .
               </p>
-              <button className="px-6 py-3 bg-orangeColor text-white capitalize flex gap-5 items-center rounded-lg mt-10">
-                <span>shop now </span> <IoIosArrowRoundForward />
-              </button>
+              <Link
+                to={"/shop"}
+                className="px-6 py-3 bg-orangeColor text-white capitalize flex gap-2 inline-flex items-center rounded-lg mt-10 hover:bg-orangeColor/90"
+              >
+                <span>shop now </span> <IoIosArrowRoundForward size={20} />
+              </Link>
             </div>
             <div className="flex-1 grid place-items-end">
               <img src={bg1} alt="" />
@@ -51,9 +55,12 @@ const HomeSlider = () => {
                 Looking for toys that bring kids joy? We have a huge selection of fun and educational toys to delight
                 children of all ages .
               </p>
-              <button className="px-6 py-3 bg-orangeColor text-white capitalize flex gap-5 items-center rounded-lg mt-10">
-                <span>shop now </span> <IoIosArrowRoundForward />
-              </button>
+              <Link
+                to={"/shop"}
+                className="px-6 py-3 bg-purpleColor text-white capitalize flex gap-2 inline-flex items-center rounded-lg mt-10 hover:bg-purpleColor/90"
+              >
+                <span>shop now </span> <IoIosArrowRoundForward size={20} />
+              </Link>
             </div>
             <div className="flex-1 grid place-items-end">
               <img src={bg2} alt="" />
@@ -72,9 +79,12 @@ const HomeSlider = () => {
                 Looking for toys that bring kids joy? We have a huge selection of fun and educational toys to delight
                 children of all ages .
               </p>
-              <button className="px-6 py-3 bg-orangeColor text-white capitalize flex gap-5 items-center rounded-lg mt-10">
-                <span>shop now </span> <IoIosArrowRoundForward />
-              </button>
+              <Link
+                to={"/shop"}
+                className="px-6 py-3 bg-orangeColor text-white capitalize flex gap-2 items-center rounded-lg mt-10 inline-flex hover:bg-orangeColor/90"
+              >
+                <span>shop now </span> <IoIosArrowRoundForward size={20} />
+              </Link>
             </div>
             <div className="flex-1 grid place-items-end">
               <img src={bg3} alt="" />
@@ -93,9 +103,12 @@ const HomeSlider = () => {
                 Looking for toys that bring kids joy? We have a huge selection of fun and educational toys to delight
                 children of all ages .
               </p>
-              <button className="px-6 py-3 bg-greenColor text-white capitalize flex gap-5 items-center rounded-lg mt-10">
-                <span>shop now </span> <IoIosArrowRoundForward />
-              </button>
+              <Link
+                to={"/shop"}
+                className="px-6 py-3 bg-blueColor text-white capitalize flex gap-2 items-center rounded-lg mt-10 inline-flex hover:bg-blueColor/90"
+              >
+                <span>shop now </span> <IoIosArrowRoundForward size={20} />
+              </Link>
             </div>
             <div className="flex-1 grid place-items-end">
               <img src={bg4} alt="" />
@@ -114,9 +127,12 @@ const HomeSlider = () => {
                 Looking for toys that bring kids joy? We have a huge selection of fun and educational toys to delight
                 children of all ages .
               </p>
-              <button className="px-6 py-3 bg-orangeColor text-white capitalize flex gap-5 items-center rounded-lg mt-10">
-                <span>shop now </span> <IoIosArrowRoundForward />
-              </button>
+              <Link
+                to="/shop"
+                className="px-6 py-3 bg-purpleColor text-white capitalize flex gap-2 items-center rounded-lg mt-10 cursor-pointer inline-flex hover:bg-purpleColor/90"
+              >
+                <span>shop now </span> <IoIosArrowRoundForward size={20} />
+              </Link>
             </div>
             <div className="flex-1 grid place-items-end">
               <img src={bg5} alt="" />

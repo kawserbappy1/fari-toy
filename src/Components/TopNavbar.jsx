@@ -1,10 +1,8 @@
 import React from "react";
 import { BsFillTelephoneFill, BsMegaphoneFill } from "react-icons/bs";
-import { Link } from "react-router";
-
 const TopNavbar = () => {
   return (
-    <div className=" bg-purpleColor ">
+    <div className=" bg-purpleColor border-b border-b-bg1/10">
       <div className="container mx-auto flex  items-center justify-between bg-purpleColor px-2 py-2 md:px-4">
         <div className="flex gap-2 items-center text-white font-poppins text-sm md:text-base">
           <BsFillTelephoneFill />

@@ -12,7 +12,7 @@ const HomeToys = ({ allToys }) => {
         ))}
       </div>
       <Link to="/shop" className="btn capitalize font-bold mt-10 bg-orangeColor text-white tracking-wider rounded-lg ">
-        view more
+        view more toys
       </Link>
     </div>
   );

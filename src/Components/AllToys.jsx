@@ -63,7 +63,7 @@ const AllToys = ({ allToys }) => {
           {itemsToDisplay.length > 0 ? (
             itemsToDisplay.map((toys) => <ToyCard key={toys.toyId} toys={toys}></ToyCard>)
           ) : (
-            <p className="col-span-full text-center text-xl text-gray-500">No toys found matching "{searchTerm}" 😔</p>
+            <p className="col-span-full text-center text-xl text-gray-500">No toys found matching "{searchTerm}"</p>
           )}
         </div>
       </div>

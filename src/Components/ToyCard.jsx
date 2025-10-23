@@ -41,7 +41,7 @@ const ToyCard = ({ toys }) => {
           </div>
 
           <Link to={`/details/${toyId}`} className="btn bg-orangeColor text-white">
-            See Details
+            View More
           </Link>
         </div>
       </div>

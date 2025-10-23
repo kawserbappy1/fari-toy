@@ -5,7 +5,6 @@ import { FaArrowLeft } from "react-icons/fa";
 const ErrorPage = () => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100 relative overflow-hidden">
-      {/* Floating shapes for background effect */}
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 0.15 }}
@@ -18,8 +17,6 @@ const ErrorPage = () => {
         transition={{ duration: 2, repeat: Infinity, repeatType: "mirror" }}
         className="absolute w-96 h-96 bg-purple-400 rounded-full blur-3xl bottom-10 right-20"
       />
-
-      {/* Main 404 Card */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -46,7 +43,6 @@ const ErrorPage = () => {
 
         <p className="text-gray-600 mt-3">The page you’re looking for doesn’t exist or was moved.</p>
 
-        {/* Home Button */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="mt-8">
           <Link
             to="/"
@@ -57,7 +53,6 @@ const ErrorPage = () => {
         </motion.div>
       </motion.div>
 
-      {/* Small floating emoji for fun */}
       <motion.span
         animate={{
           y: [0, -15, 0],

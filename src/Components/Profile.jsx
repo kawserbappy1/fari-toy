@@ -2,23 +2,16 @@ import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
-import Swal from "sweetalert2"; // 👈 Import SweetAlert
+import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
-
   const [isEditing, setIsEditing] = useState(false);
   const [displayName, setDisplayName] = useState(user?.displayName || "");
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
-
-  // Keep error state for Firebase errors, but success will be handled by Swal
   const [error, setError] = useState("");
-
-  // Removed: success state, as Swal handles success display
-
   if (!user) {
-    // ... (Your existing "No User Found" logic)
     return (
       <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100">
         <motion.div
@@ -37,10 +30,7 @@ const Profile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     setError("");
-
     let profileUpdated = false;
-
-    // --- Update Name and Photo URL ---
     if (user.displayName !== displayName || user.photoURL !== photoURL) {
       try {
         await updateProfile(user, {
@@ -51,30 +41,24 @@ const Profile = () => {
       } catch (err) {
         console.error("Profile update error:", err);
         setError(`Failed to update profile: ${err.message}`);
-        // Do NOT return here if you want to show the error alert
       }
     }
-
-    // --- Display Feedback ---
     if (error) {
-      // Display Firebase error using Swal
       Swal.fire({
         icon: "error",
         title: "Update Failed!",
         text: error,
       });
     } else if (profileUpdated) {
-      // 👈 Use SweetAlert for success message
       Swal.fire({
         icon: "success",
         title: "Updated Successfully!",
         text: "Your profile information has been saved.",
         showConfirmButton: false,
-        timer: 2000, // Close after 2 seconds
+        timer: 2000,
       });
-      setIsEditing(false); // Exit editing mode only on successful update
+      setIsEditing(false);
     } else {
-      // Handle case where nothing changed
       Swal.fire({
         icon: "info",
         title: "No Changes",
@@ -82,7 +66,7 @@ const Profile = () => {
         showConfirmButton: false,
         timer: 2000,
       });
-      setIsEditing(false); // Exit editing mode
+      setIsEditing(false);
     }
   };
 

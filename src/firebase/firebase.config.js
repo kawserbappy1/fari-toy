@@ -4,12 +4,12 @@ import { getAuth } from "firebase/auth";
 
 // Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBmUEfhg0vzG-0IygMhtTSsrrx0vy06vLU",
-  authDomain: "fari-toy.firebaseapp.com",
-  projectId: "fari-toy",
-  storageBucket: "fari-toy.firebasestorage.app",
-  messagingSenderId: "747982960913",
-  appId: "1:747982960913:web:7b8d1c915743b4f4f574b0",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase

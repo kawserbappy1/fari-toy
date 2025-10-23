@@ -5,7 +5,6 @@ import ToyDetails from "./ToyDetails";
 const ShowToyDetails = () => {
   const { id } = useParams();
   const allToys = useLoaderData();
-
   const [toy, setToy] = useState(null);
 
   useEffect(() => {
@@ -18,7 +17,6 @@ const ShowToyDetails = () => {
   if (toy === null) {
     return <div className="text-center text-xl p-10">Loading toy details or toy not found...</div>;
   }
-
   return (
     <div className="py-10">
       <ToyDetails toy={toy} />

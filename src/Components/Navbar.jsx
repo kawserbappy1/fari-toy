@@ -1,18 +1,16 @@
 import { useState, useEffect, useContext } from "react";
-import { CgMenuGridO, CgShoppingCart } from "react-icons/cg";
-import { CiSearch } from "react-icons/ci";
+import { CgMenuGridO } from "react-icons/cg";
 import { IoClose } from "react-icons/io5";
 import logo from "../assets/logo.png";
 import MyLinks from "./MyLinks";
-import { Link, useNavigate } from "react-router"; // ✅ updated import
+import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(true);
   const [isSticky, setIsSticky] = useState(false);
-  const navigate = useNavigate(); // ✅ navigation hook
-
+  const navigate = useNavigate();
   const { user, logOut } = useContext(AuthContext);
 
   useEffect(() => {
@@ -21,7 +19,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ✅ Logout handler with redirect
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -33,7 +30,7 @@ const Navbar = () => {
           timer: 1500,
           showConfirmButton: false,
         });
-        navigate("/"); // ✅ redirect to home after logout
+        navigate("/");
       })
       .catch((err) => {
         Swal.fire({
@@ -45,14 +42,14 @@ const Navbar = () => {
   };
 
   return (
-    <div
+    <nav
       className={`sticky top-0 z-50 transition-all duration-300 ${isSticky ? "shadow-md bg-white" : "bg-transparent"}`}
     >
-      <nav className="container mx-auto flex justify-between items-center h-16 px-2 md:px-4">
+      <div className="container mx-auto flex justify-between items-center h-16 px-2 md:px-4">
         {/* Logo */}
         <div>
           <Link to="/">
-            <img src={logo} alt="Logo" className="w-30" />
+            <img src={logo} alt="Logo" className="w-24 md:w-30" />
           </Link>
         </div>
 
@@ -80,9 +77,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Menu Buttons */}
         <div className="flex items-center gap-2 md:gap-5 relative">
-          {/* Conditional Login / User */}
           {user ? (
             <div className="flex  gap-2">
               <div className="relative group">
@@ -96,8 +91,8 @@ const Navbar = () => {
                 </div>
               </div>
               <button
-                onClick={handleLogout} // ✅ use updated logout handler
-                className="px-4 py-2 text-white bg-orangeColor hover:bg-orange-500 rounded-md"
+                onClick={handleLogout}
+                className="px-2 py-1 md:px-4 md:py-2 text-white bg-orangeColor hover:bg-orange-500 rounded-md"
               >
                 Logout
               </button>
@@ -112,12 +107,49 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button onClick={() => setShowMenu(!showMenu)} className="md:hidden z-50">
-          {showMenu ? <IoClose size={22} /> : <CgMenuGridO size={22} />}
+          {showMenu ? <CgMenuGridO size={22} /> : <IoClose size={22} className="text-white" />}
         </button>
-      </nav>
-
-      {/* Search Box */}
-    </div>
+      </div>
+      {/* Mobile Menu */}
+      <div
+        className={`absolute top-0  w-full min-h-screen bg-purpleColor py-20 text-white transition-all duration-500 ${
+          showMenu ? "-left-[100%]" : "left-0"
+        }`}
+      >
+        <ul className="flex flex-col items-center gap-8">
+          <li>
+            <MyLinks onClick={() => setShowMenu(!showMenu)} to="/">
+              Home
+            </MyLinks>
+          </li>
+          <li>
+            <MyLinks onClick={() => setShowMenu(!showMenu)} to="/shop">
+              Shop
+            </MyLinks>
+          </li>
+          <li>
+            <MyLinks onClick={() => setShowMenu(!showMenu)} to="/discover">
+              Discover
+            </MyLinks>
+          </li>
+          <li>
+            <MyLinks onClick={() => setShowMenu(!showMenu)} to="/help">
+              Help
+            </MyLinks>
+          </li>
+          <li>
+            <MyLinks onClick={() => setShowMenu(!showMenu)} to="/blog">
+              Blog
+            </MyLinks>
+          </li>
+          <li>
+            <MyLinks onClick={() => setShowMenu(!showMenu)} to="/profile">
+              My Profile
+            </MyLinks>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 };
 
