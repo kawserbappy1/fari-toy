@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const Profile = () => {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const [isEditing, setIsEditing] = useState(false);
   const [displayName, setDisplayName] = useState(user?.displayName || "");
   const [photoURL, setPhotoURL] = useState(user?.photoURL || "");
@@ -30,34 +30,37 @@ const Profile = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     setError("");
-    let profileUpdated = false;
+
     if (user.displayName !== displayName || user.photoURL !== photoURL) {
       try {
         await updateProfile(user, {
           displayName: displayName,
           photoURL: photoURL,
         });
-        profileUpdated = true;
+
+        setUser({
+          ...user,
+          displayName: displayName,
+          photoURL: photoURL,
+        });
+
+        Swal.fire({
+          icon: "success",
+          title: "Updated Successfully!",
+          text: "Your profile information has been saved.",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+
+        setIsEditing(false);
       } catch (err) {
         console.error("Profile update error:", err);
-        setError(`Failed to update profile: ${err.message}`);
+        Swal.fire({
+          icon: "error",
+          title: "Update Failed!",
+          text: err.message,
+        });
       }
-    }
-    if (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Update Failed!",
-        text: error,
-      });
-    } else if (profileUpdated) {
-      Swal.fire({
-        icon: "success",
-        title: "Updated Successfully!",
-        text: "Your profile information has been saved.",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      setIsEditing(false);
     } else {
       Swal.fire({
         icon: "info",
@@ -83,24 +86,18 @@ const Profile = () => {
           className="bg-white/80 backdrop-blur-xl shadow-2xl rounded-3xl p-8 w-full max-w-lg border border-white/40 text-center"
         >
           <img
-            src={photoURL || "https://i.ibb.co/6DYM05G/user.png"}
+            src={photoURL || ""}
             alt="Profile"
             className="w-28 h-28 mx-auto rounded-full object-cover border-4 border-orangeColor shadow-md mb-4"
           />
           <h2 className="text-2xl font-bold text-gray-800 mb-2">{user.displayName || "Anonymous User"}</h2>
           <p className="text-gray-600 mb-6">{user.email}</p>
 
-          {/* Removed: Display of success/error state here, as Swal will handle it */}
-
           {isEditing ? (
-            /* --- EDIT MODE FORM --- */
             <form
               onSubmit={handleUpdate}
               className="text-left space-y-4 bg-white/60 p-5 rounded-2xl border border-white/50 shadow-inner"
             >
-              {/* ... (Your Name, Photo URL, Email fields remain the same) ... */}
-
-              {/* Name Input */}
               <div>
                 <label htmlFor="displayName" className="font-semibold text-gray-700 block mb-1">
                   Full Name:
@@ -115,7 +112,6 @@ const Profile = () => {
                 />
               </div>
 
-              {/* Photo URL Input */}
               <div>
                 <label htmlFor="photoURL" className="font-semibold text-gray-700 block mb-1">
                   Photo URL:
@@ -130,7 +126,6 @@ const Profile = () => {
                 />
               </div>
 
-              {/* Email (Read-only) */}
               <div>
                 <label className="font-semibold text-gray-700 block mb-1">Email:</label>
                 <input
@@ -142,7 +137,6 @@ const Profile = () => {
                 <p className="text-sm text-gray-500 mt-1">Email cannot be changed.</p>
               </div>
 
-              {/* Password (Read-only for visual feedback) */}
               <div>
                 <span className="font-semibold text-gray-700">Password: </span>
                 <span className="text-gray-600">******** (Not editable here)</span>
@@ -153,7 +147,7 @@ const Profile = () => {
                   type="button"
                   onClick={() => {
                     setIsEditing(false);
-                    // Reset state to current user values on cancel
+
                     setDisplayName(user.displayName || "");
                     setPhotoURL(user.photoURL || "");
                     setError("");
@@ -171,10 +165,8 @@ const Profile = () => {
               </div>
             </form>
           ) : (
-            /* --- VIEW MODE DISPLAY --- */
             <>
               <div className="text-left space-y-3 bg-white/60 p-5 rounded-2xl border border-white/50 shadow-inner">
-                {/* ... (Your view mode details remain the same) ... */}
                 <div>
                   <span className="font-semibold text-gray-700">Full Name: </span>
                   <span className="text-gray-600">{user.displayName || "Not set"}</span>
@@ -196,7 +188,6 @@ const Profile = () => {
               <button
                 onClick={() => {
                   setIsEditing(true);
-                  // Initialize state with current user data when starting edit
                   setDisplayName(user.displayName || "");
                   setPhotoURL(user.photoURL || "");
                   setError("");

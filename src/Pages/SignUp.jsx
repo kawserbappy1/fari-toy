@@ -23,12 +23,13 @@ const SignUp = () => {
     const password = form.password.value;
     setLoading(true);
 
-    const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{8,}$/;
+    const regExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^()\-_=+])[A-Za-z\d@$!%*?&#^()\-_=+]{6,}$/;
 
     if (!regExp.test(password)) {
       toast.error(
-        "Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character"
+        "Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character"
       );
+      setLoading(false);
       return;
     }
     createUser(email, password)
@@ -58,12 +59,10 @@ const SignUp = () => {
     googleLogin()
       .then((result) => {
         const loggedUser = result.user;
-
-        // ✅ Update user context manually to ensure photoURL is present
         setUser({
           displayName: loggedUser.displayName,
           email: loggedUser.email,
-          photoURL: loggedUser.photoURL, // this fixes navbar image
+          photoURL: loggedUser.photoURL,
           uid: loggedUser.uid,
         });
 
@@ -76,7 +75,7 @@ const SignUp = () => {
           showConfirmButton: false,
         });
 
-        navigate("/"); // Navigate after login
+        navigate("/");
       })
       .catch((err) =>
         Swal.fire({
@@ -90,7 +89,6 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-100 via-pink-50 to-orange-100 px-4 relative overflow-hidden">
-      {/* Floating background shapes */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 0.1, scale: 1 }}

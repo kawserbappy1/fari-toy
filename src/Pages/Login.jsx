@@ -19,7 +19,6 @@ const Login = () => {
 
   const from = location.state?.from?.pathname || "/";
 
-  // Handle email/password login
   const handleLogin = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -47,7 +46,6 @@ const Login = () => {
       .finally(() => setLoading(false));
   };
 
-  // Handle Google login
   const handleGoogleLogin = () => {
     setLoading(true);
     googleLogin()
@@ -73,7 +71,6 @@ const Login = () => {
       .finally(() => setLoading(false));
   };
 
-  // ✅ Handle forgot password
   const handleForgotPassword = () => {
     if (!email) {
       Swal.fire({
@@ -106,7 +103,6 @@ const Login = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100 px-4 relative overflow-hidden">
-      {/* Floating Background */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 0.1, y: 0 }}
@@ -120,7 +116,6 @@ const Login = () => {
         className="absolute w-96 h-96 bg-purple-400 rounded-full blur-3xl bottom-20 right-10"
       />
 
-      {/* Login Card */}
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -177,14 +172,12 @@ const Login = () => {
           </button>
         </form>
 
-        {/* Divider */}
         <div className="flex items-center my-6">
           <div className="flex-grow h-px bg-gray-300"></div>
           <span className="px-3 text-gray-500 text-sm">OR</span>
           <div className="flex-grow h-px bg-gray-300"></div>
         </div>
 
-        {/* Google Login */}
         <button
           onClick={handleGoogleLogin}
           className="flex items-center justify-center w-full border border-gray-300 py-3 rounded-lg bg-white hover:bg-gray-100 transition duration-300 shadow-sm"
@@ -193,7 +186,6 @@ const Login = () => {
           <span className="font-semibold text-gray-700">Continue with Google</span>
         </button>
 
-        {/* Register Redirect */}
         <p className="text-center text-gray-600 mt-8">
           Don’t have an account?{" "}
           <Link to="/signup" className="text-orangeColor font-semibold hover:underline">

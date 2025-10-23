@@ -13,7 +13,6 @@ const MainLayoouts = () => {
       <main className="flex-1 pt-26">
         <Outlet />
       </main>
-
       <footer>
         <Footer />
       </footer>
