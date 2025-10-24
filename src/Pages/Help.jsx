@@ -9,12 +9,13 @@ import {
   FaEdit,
   FaUserPlus,
 } from "react-icons/fa";
+import BottomToTop from "../Components/BottomToTop";
 
 const Help = () => {
   return (
     <>
       <Helmet>
-        <title>Help || FARI TOY</title>
+        <title>HELP || FARI TOY</title>
       </Helmet>
       <div className="bg-gradient-to-b from-pink-50 to-blue-50  py-12 px-6">
         <div className="container mx-auto bg-white rounded-2xl shadow-xl p-8">
@@ -91,6 +92,7 @@ const Help = () => {
           </div>
         </div>
       </div>
+      <BottomToTop></BottomToTop>
     </>
   );
 };

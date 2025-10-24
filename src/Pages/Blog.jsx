@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router";
 import { FaCalendarAlt, FaUser, FaSmile } from "react-icons/fa";
+import BottomToTop from "../Components/BottomToTop";
 const Blog = () => {
   const posts = [
     {
@@ -34,7 +35,6 @@ const Blog = () => {
       </Helmet>
       <div className=" bg-gradient-to-b from-pink-50 to-blue-50 py-12 px-6">
         <div className="container mx-auto">
-          {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-pink-600 mb-3">Our Blog</h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
@@ -42,7 +42,6 @@ const Blog = () => {
             </p>
           </div>
 
-          {/* Blog Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {posts.map((post, index) => (
               <div
@@ -90,6 +89,7 @@ const Blog = () => {
           </div>
         </div>
       </div>
+      <BottomToTop></BottomToTop>
     </>
   );
 };

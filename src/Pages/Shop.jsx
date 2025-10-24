@@ -2,6 +2,7 @@ import ShopBanner from "../Components/ShopBanner";
 import AllToys from "../Components/AllToys";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import BottomToTop from "../Components/BottomToTop";
 
 const Shop = () => {
   const [allToys, setAllToys] = useState([]);
@@ -36,6 +37,7 @@ const Shop = () => {
       </Helmet>
       <ShopBanner />
       <AllToys allToys={allToys} />
+      <BottomToTop></BottomToTop>
     </div>
   );
 };

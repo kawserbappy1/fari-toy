@@ -44,10 +44,10 @@ const Footer = () => {
                 <Link>Contact Us</Link>
               </li>
               <li>
-                <Link>Privacy and Policy</Link>
+                <Link to={"/discover"}>Privacy and Policy</Link>
               </li>
               <li>
-                <Link>Terms and Condition</Link>
+                <Link to={"/discover"}>Terms and Condition</Link>
               </li>
             </ul>
           </div>
@@ -105,16 +105,28 @@ const Footer = () => {
           <Link className="underline text-orangeColor">Md. Kawser Hamid bappy</Link>
         </p>
         <div className="flex items-center gap-2">
-          <Link to={"/"} className=" w-10 h-10 bg-purpleColor text-white grid place-items-center rounded">
+          <Link
+            to={"https://www.facebook.com/kawserbappy01"}
+            className=" w-10 h-10 bg-purpleColor text-white grid place-items-center rounded"
+          >
             <FaFacebookF className=" transition-all duration-500 hover:scale-150" />
           </Link>
-          <Link to={"/"} className=" w-10 h-10 bg-pinkColor text-white grid place-items-center rounded">
+          <Link
+            to={"https://www.facebook.com/kawserbappy01"}
+            className=" w-10 h-10 bg-pinkColor text-white grid place-items-center rounded"
+          >
             <FaSquareInstagram className=" transition-all duration-500 hover:scale-150" />
           </Link>
-          <Link to={"/"} className=" w-10 h-10 bg-blueColor text-white grid place-items-center rounded">
+          <Link
+            to={"https://www.facebook.com/kawserbappy01"}
+            className=" w-10 h-10 bg-blueColor text-white grid place-items-center rounded"
+          >
             <FaLinkedin className=" transition-all duration-500 hover:scale-150" />
           </Link>
-          <Link to={"/"} className=" w-10 h-10 bg-black text-white grid place-items-center rounded">
+          <Link
+            to={"https://www.facebook.com/kawserbappy01"}
+            className=" w-10 h-10 bg-black text-white grid place-items-center rounded"
+          >
             <FaXTwitter className=" transition-all duration-500 hover:scale-150" />
           </Link>
         </div>

@@ -6,7 +6,7 @@ import bg4 from "../assets/bg4.png";
 import bg5 from "../assets/bg5.png";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Link } from "react-router";
@@ -14,7 +14,13 @@ import { Link } from "react-router";
 const HomeSlider = () => {
   return (
     <Swiper
-      modules={[Pagination]}
+      modules={[Pagination, Autoplay]}
+      effect="fade"
+      autoplay={{
+        delay: 5000,
+        disableOnInteraction: false,
+      }}
+      loop={true}
       pagination={{
         clickable: true,
         dynamicBullets: true,

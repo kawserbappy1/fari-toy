@@ -8,7 +8,7 @@ import { FaEye } from "react-icons/fa";
 import { IoEyeOff } from "react-icons/io5";
 
 const Login = () => {
-  const { logInFunction, googleLogin, sendPassResetEmailFunc } = useContext(AuthContext);
+  const { logInFunction, googleLogin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -70,8 +70,7 @@ const Login = () => {
       )
       .finally(() => setLoading(false));
   };
-
-  const handleForgotPassword = () => {
+  const handleForgotPasswordClick = () => {
     if (!email) {
       Swal.fire({
         title: "Oops!",
@@ -81,26 +80,8 @@ const Login = () => {
       });
       return;
     }
-
-    sendPassResetEmailFunc(email)
-      .then(() => {
-        Swal.fire({
-          title: "Email Sent!",
-          text: "Check your inbox to reset your password",
-          icon: "success",
-          confirmButtonColor: "#f97316",
-        });
-      })
-      .catch((err) =>
-        Swal.fire({
-          title: "Failed",
-          text: err.message,
-          icon: "error",
-          confirmButtonColor: "#f97316",
-        })
-      );
+    navigate("/forgetpass", { state: { email } });
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-100 via-pink-50 to-purple-100 px-4 relative overflow-hidden">
       <motion.div
@@ -154,13 +135,15 @@ const Login = () => {
             >
               {showPassword ? <FaEye /> : <IoEyeOff />}
             </span>
-            <button
-              type="button"
-              onClick={handleForgotPassword}
-              className="hover:underline cursor-pointer mt-2 text-sm text-orangeColor"
-            >
-              Forgot password?
-            </button>
+            <div>
+              <span
+                onClick={handleForgotPasswordClick}
+                state={{ email }}
+                className="hover:underline cursor-pointer mt-2 text-sm text-orangeColor"
+              >
+                Forgot password ?
+              </span>
+            </div>
           </div>
 
           <button

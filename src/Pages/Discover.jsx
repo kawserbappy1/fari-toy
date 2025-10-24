@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 
 import { FaStar, FaFire, FaChild, FaGift, FaPuzzlePiece, FaCar, FaRobot, FaBaby } from "react-icons/fa";
 import { Link } from "react-router";
+import BottomToTop from "../Components/BottomToTop";
 
 const Discover = () => {
   const categories = [
@@ -34,7 +35,7 @@ const Discover = () => {
   return (
     <>
       <Helmet>
-        <title>Discover|| FARI TOY</title>
+        <title>DISCOVER || FARI TOY</title>
       </Helmet>
 
       <div className="bg-gradient-to-b from-pink-50 to-blue-50   py-12 px-6">
@@ -105,6 +106,7 @@ const Discover = () => {
           </section>
         </div>
       </div>
+      <BottomToTop></BottomToTop>
     </>
   );
 };

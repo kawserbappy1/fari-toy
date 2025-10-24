@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router";
 import MainLayoouts from "../Layouts/MainLayoouts";
-import AboutUs from "../Pages/AboutUs";
 import Blog from "../Pages/Blog";
 import Discover from "../Pages/Discover";
 import Help from "../Pages/Help";
@@ -12,6 +11,7 @@ import ShowToyDetails from "../Components/ShowToyDetails";
 import Profile from "../Components/Profile";
 import PrivateRoute from "./PrivateRoute";
 import ErrorPage from "../Components/ErrorPage";
+import ForgetPassword from "../Components/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -40,10 +40,6 @@ const router = createBrowserRouter([
         element: <Blog></Blog>,
       },
       {
-        path: "/about",
-        element: <AboutUs></AboutUs>,
-      },
-      {
         path: "/shop",
         element: <Shop></Shop>,
       },
@@ -63,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/forgetpass",
+        element: <ForgetPassword></ForgetPassword>,
       },
       {
         path: "/profile",
