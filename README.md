@@ -37,8 +37,31 @@ https://faritoystore.netlify.app
 - "swiper": "^12.0.3",
 - "tailwindcss": "^4.1.15"
 ---
+## 💻 How to Run Locally
 
+Follow these steps to run Hero Home on your local machine:
 
+### 1. Clone the repository
 
+git clone 
+cd hero-home
+
+### 2. Install dependencies
+Frontend
+cd client
+npm install
+
+### 2. Start the frontend
+cd ../client
+npm start
+
+### 6. Open the app
+
+Visit http://localhost:5173
+ in your browser to see the application running locally.
+
+🔗 Live Site
+
+Website URL: faritoystore.netlify.app
 
 
